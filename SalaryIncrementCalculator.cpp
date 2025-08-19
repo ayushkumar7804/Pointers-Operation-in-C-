@@ -1,75 +1,60 @@
-/*Ayush Yadav
-  24070123028*/
+// Ayush Yadav
+// 24070123028
 
+#include<iostream>
+using namespace std;
 
-#include <iostream>
-using std::cout;
-using std::cin;
-using std::endl;
+void checkIncrement(int* years, bool* researchDone, bool* newProject, double* profit, double* salary) {
+    int conditionsMet = 0;
 
-void calculatehike( double &current_salary, bool& has_completed_one_year, bool& has_completed_research_projects, bool& has_new_project_pipeline ){
-    if( has_completed_one_year && has_completed_research_projects && has_new_project_pipeline){
-        current_salary *= 1.20;
-        cout << "Employee is eligible for hike in the salary "<< endl;
-    }
-    else{
-        cout << " The conditions are not met so employee will not recieve the hike"<< endl;
+    if (*years >= 1) conditionsMet++;
+    if (*researchDone) conditionsMet++;
+    if (*newProject) conditionsMet++;
+    if (*profit > 100000) conditionsMet++;
 
+    if (conditionsMet >= 3) {
+        *salary += (*salary * 0.20);
+        cout <<"\nEligible for increment.\nUpdated Salary: " << *salary << endl;
+    } else {
+        cout <<"\nNot eligible for increment.\nSalary remains: " << *salary << endl;
     }
 }
+
 int main() {
-    double current_salary;
-    bool has_completed_one_year;
-    bool has_completed_research_projects;
-    bool has_new_project_pipeline;
+    int yearsCompleted;
+    bool hasResearchProjects, hasNewProjectPipeline;
+    double profitGenerated, currentSalary;
 
-    double* salaryptr= &current_salary;
-    bool* yearptr = &has_completed_one_year;
-    bool *reasearch_project = &has_completed_research_projects; 
-    bool *new_pipline = &has_new_project_pipeline;
+    cout<<"Enter years completed\n";
+    cin>>yearsCompleted;
 
-    cout << "Enter Current Employee Salary ---> "<< endl;
-    cin >> current_salary;
+    cout<<"Worked on Research Projects? (1: Yes, 0: No)\n";
+    cin>>hasResearchProjects;
 
-    cout << "has the employee completed 1 year ?(1 for yes and 0 for no ): "<< endl;
-    cin >> has_completed_one_year;
+    cout<<"New Research Project in Pipeline? (1: Yes, 0: No)\n";
+    cin>>hasNewProjectPipeline;
 
-    cout << "has completed the research projects?( 1 for YES and 0 for NO ):"<< endl;
-    cin  >> has_completed_research_projects;
+    cout <<"Profit generated: Rs ";
+    cin >> profitGenerated;
 
-    cout << "Is the new project in the pipline?( select 1 for True and 0 for False): "<< endl;
-    cin >> has_new_project_pipeline; 
+    cout <<"\nCurrent salary: Rs ";
+    cin >> currentSalary;
 
-    calculatehike (current_salary, has_completed_one_year, has_completed_research_projects,has_new_project_pipeline);
+    checkIncrement(&yearsCompleted, &hasResearchProjects, &hasNewProjectPipeline, &profitGenerated, &currentSalary);
 
-    cout << "Final Salary: " << current_salary << endl;
-    
-
-
+    return 0;
 }
-/*OUTPUT'
-  Enter Current Employee Salary --->
-100000
-has the employee completed 1 year ?(1 for yes and 0 for no ): 
-1
-has completed the research projects?( 1 for YES and 0 for NO ):
-1
-Is the new project in the pipline?( select 1 for True and 0 for False): 
-1
-Employee is eligible for hike in the salary 
-Final Salary: 120000*/
 
-/* When the conditon didn't met so OUTPUT would be ----->>
-Enter Current Employee Salary ---> 
-100000
-has the employee completed 1 year ?(1 for yes and 0 for no ): 
-0
-has completed the research projects?( 1 for YES and 0 for NO ):
-1
-Is the new project in the pipline?( select 1 for True and 0 for False): 
-1
- The conditions are not met so employee will not recieve the hike
-Final Salary: 100000*/
-    
+// OUTPUT
+// Enter years completed
+// 3
+// Worked on Research Projects? (1: Yes, 0: No)
+// 1
+// New Research Project in Pipeline? (1: Yes, 0: No)
+// 0
+// Profit generated: Rs 200000
 
- 
+// Current salary: Rs 20000
+
+// Eligible for increment.
+// Updated Salary: 24000
